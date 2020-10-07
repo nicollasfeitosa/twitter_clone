@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg menu">
+	<div class="container">
+	  <div class="navbar-nav">
+	  	<a class="menuItem" href="/timeline">
+	  		Home
+	  	</a>
+
+	  	<a class="menuItem" href="/sair">
+	  		Sair
+	  	</a>
+			<img src="/img/twitter_logo.png" class="menuIco" />
+	  </div>
+	</div>
+</nav>
+
+<div class="container mt-5">
+	<div class="row pt-2">
+		
+		<div class="col-md-3">
+
+			<div class="perfil">
+				<div class="perfilTopo">
+
+				</div>
+
+				<div class="perfilPainel">
+					
+					<div class="row mt-2 mb-2">
+						<div class="col mb-2">
+							<span class="perfilPainelNome"><?= $this->view->info_usuario['nome'] ?></span>
+						</div>
+					</div>
+
+					<div class="row mb-2">
+
+						<div class="col">
+							<span class="perfilPainelItem">Tweets</span><br />
+							<span class="perfilPainelItemValor"><?= $this->view->total_tweets['total_tweets'] ?></span>
+						</div>
+
+						<div class="col">
+							<span class="perfilPainelItem">Seguindo</span><br />
+							<span class="perfilPainelItemValor"><?= $this->view->total_seguindo['total_seguindo'] ?></span>
+						</div>
+
+						<div class="col">
+							<span class="perfilPainelItem">Seguidores</span><br />
+							<span class="perfilPainelItemValor"><?= $this->view->total_seguidores['total_seguidores'] ?></span>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-md-6">
+
+        <?php foreach($this->view->usuarios as $indice_arr => $usuario) { ?>
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row ">
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <?= $usuario['nome'] ?>
+                                </div>
+                            
+                                <div class="col-md-6 d-flex justify-content-end">
+                                    <div>
+                                        <a href="/unfollow?id=<?=$usuario['id_usuario_seguindo']?>" class="btn btn-danger">Unfollow</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+		</div>
+	</div>
+</div>

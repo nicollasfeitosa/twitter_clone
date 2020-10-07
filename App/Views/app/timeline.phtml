@@ -1,0 +1,121 @@
+<nav class="navbar navbar-expand-lg menu">
+	<div class="container">
+	  <div class="navbar-nav">
+	  	<a class="menuItem" href="/timeline">
+	  		Home
+	  	</a>
+
+	  	<a class="menuItem" href="/sair">
+	  		Sair
+	  	</a>
+			<img src="/img/twitter_logo.png" class="menuIco" />
+	  </div>
+	</div>
+</nav>
+
+<div class="container mt-5">
+	<div class="row pt-2">
+		
+		<div class="col-md-3">
+
+			<div class="perfil">
+				<div class="perfilTopo">
+
+				</div>
+
+				<div class="perfilPainel">
+					
+					<div class="row mt-2 mb-2">
+						<div class="col mb-2">
+							<span class="perfilPainelNome"><?= $this->view->info_usuario['nome'] ?></span>
+						</div>
+					</div>
+
+					<div class="row mb-2">
+
+						<div class="col">
+							<span class="perfilPainelItem">Tweets</span><br />
+							<span class="perfilPainelItemValor"><?= $this->view->total_tweets['total_tweets'] ?></span>
+						</div>
+
+						<a href="/seguindo" id="seguindo">
+						<div class="col seguindo">
+							<span class="perfilPainelItem">Seguindo</span><br />
+							<span class="perfilPainelItemValor"><?= $this->view->total_seguindo['total_seguindo'] ?></span>
+						</div>
+						</a>
+
+						<div class="col">
+							<span class="perfilPainelItem">Seguidores</span><br />
+							<span class="perfilPainelItemValor"><?= $this->view->total_seguidores['total_seguidores'] ?></span>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-md-6">
+			<div class="row mb-2">
+				<div class="col tweetBox">
+					<form action="/tweet" method="POST">
+						<textarea style="width: 520px; height: 80px;" class="form-control" name="tweet" id="tweet" rows="3" placeholder="O que está acontecendo?"></textarea>
+						
+						<div class="col mt-2 d-flex justify-content-end">
+							<button type="submit" class="btn btn-primary twitterBtn"><strong>Tweetar</strong></button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+			<section id="refresh">
+			<a href="/timeline">
+				<div class="row tweet">
+					<div class="col text-center">
+					<i class="fas fa-redo-alt"></i> <span>Clique aqui para carregar novos Tweets</span>
+					</div>
+				</div>
+			</a>
+			</section>
+
+			<?php foreach($this->view->tweets as $id_tweet => $tweet) { ?>
+				
+				<div class="row tweet">
+					<div class="col">
+						<p><strong><?= $tweet['nome'] ?></strong> <small><span class="text text-muted">- <?= $tweet['data'] ?></span></small></p>
+						<div class="tweetContainer">
+							<p id="tweetP"><?= $tweet['tweet'] ?></p>
+						</div>
+						
+
+						<br />
+
+						<?php if ($_SESSION['id'] == $tweet['id_user']) { ?>
+							<form action="/remover" method="POST">
+								<input name="tweetID" type="hidden" value="<?=$tweet['id']?>">
+								<div class="col d-flex justify-content-end">
+									<button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+								</div>
+							</form>
+						<?php } ?>
+						
+					</div>
+				</div>
+			<?php } ?>
+
+		</div>
+
+
+		<div class="col-md-3">
+			<div class="quemSeguir">
+				<span class="quemSeguirTitulo">Quem seguir</span><br />
+				<hr />
+				<a href="/quem_seguir" class="quemSeguirTxt">Procurar por pessoas conhecidas</a>
+			</div>
+		</div>
+
+	</div>
+</div>
